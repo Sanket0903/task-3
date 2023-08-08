@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { Button } from 'primereact/button';
 import { Accordion, AccordionTab } from 'primereact/accordion';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
-import './Form.css'; 
+import './Form.css';
 
 const App = () => {
   const [sections, setSections] = useState([]);
@@ -22,34 +23,39 @@ const App = () => {
 
   return (
     <div className="container">
-      <div className="form">
-        <input
-          type="text"
-          className="input-field"
-          placeholder="Section Header"
-          value={sectionHeader}
-          onChange={(e) => setSectionHeader(e.target.value)}
-        />
-        <textarea
-          className="textarea-field"
-          placeholder="Section Details"
-          value={sectionDetails}
-          onChange={(e) => setSectionDetails(e.target.value)}
-        ></textarea>
-        <Button label="Add" className="add-button" onClick={addSection} />
+      <div className='row'>
+        <div className='col-6'> 
+        <div className="form">
+          <input
+            type="text"
+            className="input-field"
+            placeholder="Section Header"
+            value={sectionHeader}
+            onChange={(e) => setSectionHeader(e.target.value)}
+          />
+          <textarea
+            className="textarea-field"
+            placeholder="Section Details"
+            value={sectionDetails}
+            onChange={(e) => setSectionDetails(e.target.value)}
+          ></textarea>
+          <Button label="Add" className="add-button" onClick={addSection} />
+        </div>
+        </div>
+          <div className='col-6 ml-2'>
+            {sections.length > 0 && (
+              <Accordion multiple style={{ width: "400px", border: "1px solid black" }}>
+                {sections.map((section, index) => (
+                  <AccordionTab key={index} header={`Section ${index + 1}: ${section.header}`} style={{ borderBottom: '1px solid black' }}>
+                    <div className="section-details">
+                      <p>{section.details}</p>
+                    </div>
+                  </AccordionTab>
+                ))}
+              </Accordion>
+            )}
+            </div>
       </div>
-
-      {sections.length > 0 && (
-        <Accordion multiple style={{width:"400px",border:"1px solid black"}}>
-          {sections.map((section, index) => (
-            <AccordionTab key={index} header={`Section ${index + 1}: ${section.header}`} style={{borderBottom:'1px solid black'}}>
-              <div className="section-details">
-                <p>{section.details}</p>
-              </div>
-            </AccordionTab>
-          ))}
-        </Accordion>
-      )}
     </div>
   );
 };
