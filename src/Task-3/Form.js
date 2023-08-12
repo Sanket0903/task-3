@@ -24,7 +24,7 @@ const App = () => {
   return (
     <div className="container">
       <div className='row'>
-        <div className='col-6'> 
+        <div className='col-md-6'> 
         <div className="form">
           <input
             type="text"
@@ -42,7 +42,7 @@ const App = () => {
           <Button label="Add" className="add-button" onClick={addSection} />
         </div>
         </div>
-          <div className='col-6 ml-2'>
+          <div className='col-md-6 ml-2'>
             {sections.length > 0 && (
               <Accordion multiple style={{ width: "400px", border: "1px solid black" }}>
                 {sections.map((section, index) => (
